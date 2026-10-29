@@ -1,0 +1,24 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Barra de sonido">
+<path id="Vector" d="M120 220C164.183 220 200 216.418 200 212C200 207.582 164.183 204 120 204C75.8172 204 40 207.582 40 212C40 216.418 75.8172 220 120 220Z" fill="black" fill-opacity="0.1"/>
+<path id="Vector_2" d="M198 96H164C156.268 96 150 102.268 150 110V178C150 185.732 156.268 192 164 192H198C205.732 192 212 185.732 212 178V110C212 102.268 205.732 96 198 96Z" fill="url(#paint0_linear_0_20)"/>
+<path id="Vector_3" d="M181 170C192.046 170 201 161.046 201 150C201 138.954 192.046 130 181 130C169.954 130 161 138.954 161 150C161 161.046 169.954 170 181 170Z" fill="#0B0D1E"/>
+<path id="Vector_4" d="M181 158C185.418 158 189 154.418 189 150C189 145.582 185.418 142 181 142C176.582 142 173 145.582 173 150C173 154.418 176.582 158 181 158Z" fill="#2B3048"/>
+<path id="Vector_5" d="M170 134H38C25.8497 134 16 143.85 16 156C16 168.15 25.8497 178 38 178H170C182.15 178 192 168.15 192 156C192 143.85 182.15 134 170 134Z" fill="url(#paint1_linear_0_20)"/>
+<g id="Vector_6">
+<path d="M40 146H168ZM40 156H168ZM40 166H168Z" fill="black"/>
+<path d="M40 146H168M40 156H168M40 166H168" stroke-width="4" stroke="white" stroke-opacity="0.08"/>
+</g>
+<path id="Vector_7" d="M104 174.5C105.381 174.5 106.5 173.381 106.5 172C106.5 170.619 105.381 169.5 104 169.5C102.619 169.5 101.5 170.619 101.5 172C101.5 173.381 102.619 174.5 104 174.5Z" fill="#ACE330"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_20" x1="150" y1="96" x2="150" y2="192" gradientUnits="userSpaceOnUse">
+<stop stop-color="#2B3048"/>
+<stop offset="1" stop-color="#0E1022"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_20" x1="16" y1="134" x2="16" y2="178" gradientUnits="userSpaceOnUse">
+<stop stop-color="#3A3F55"/>
+<stop offset="1" stop-color="#11142A"/>
+</linearGradient>
+</defs>
+</svg>

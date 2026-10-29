@@ -1,0 +1,27 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Aud&#195;&#173;fonos">
+<path id="Vector" d="M120 220C164.183 220 200 216.418 200 212C200 207.582 164.183 204 120 204C75.8172 204 40 207.582 40 212C40 216.418 75.8172 220 120 220Z" fill="black" fill-opacity="0.1"/>
+<path id="Vector_2" d="M52 132C52 60 84 34 120 34C156 34 188 60 188 132" stroke-width="16" stroke-linecap="round" stroke="url(#paint0_linear_0_59)"/>
+<path id="Vector_3" d="M64 118C66 72 90 52 120 52C150 52 174 72 176 118" stroke-width="3" stroke-linecap="round" stroke="#ACE330"/>
+<path id="Vector_4" d="M78 140C78 127.85 68.1503 118 56 118C43.8497 118 34 127.85 34 140V176C34 188.15 43.8497 198 56 198C68.1503 198 78 188.15 78 176V140Z" fill="url(#paint1_linear_0_59)"/>
+<path id="Vector_5" d="M206 140C206 127.85 196.15 118 184 118C171.85 118 162 127.85 162 140V176C162 188.15 171.85 198 184 198C196.15 198 206 188.15 206 176V140Z" fill="url(#paint2_linear_0_59)"/>
+<path id="Vector_6" d="M88 135C88 128.925 83.0751 124 77 124C70.9249 124 66 128.925 66 135V181C66 187.075 70.9249 192 77 192C83.0751 192 88 187.075 88 181V135Z" fill="#0E1022"/>
+<path id="Vector_7" d="M174 135C174 128.925 169.075 124 163 124C156.925 124 152 128.925 152 135V181C152 187.075 156.925 192 163 192C169.075 192 174 187.075 174 181V135Z" fill="#0E1022"/>
+<path id="Vector_8" d="M50 135C50 133.343 48.6569 132 47 132C45.3431 132 44 133.343 44 135V153C44 154.657 45.3431 156 47 156C48.6569 156 50 154.657 50 153V135Z" fill="white" fill-opacity="0.2"/>
+<path id="Vector_9" d="M178 135C178 133.343 176.657 132 175 132C173.343 132 172 133.343 172 135V153C172 154.657 173.343 156 175 156C176.657 156 178 154.657 178 153V135Z" fill="white" fill-opacity="0.2"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_59" x1="52" y1="34" x2="52" y2="132" gradientUnits="userSpaceOnUse">
+<stop stop-color="#3A3F55"/>
+<stop offset="1" stop-color="#14172A"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_59" x1="34" y1="118" x2="101.562" y2="155.159" gradientUnits="userSpaceOnUse">
+<stop stop-color="#5A607A"/>
+<stop offset="1" stop-color="#1E2238"/>
+</linearGradient>
+<linearGradient id="paint2_linear_0_59" x1="162" y1="118" x2="229.562" y2="155.159" gradientUnits="userSpaceOnUse">
+<stop stop-color="#5A607A"/>
+<stop offset="1" stop-color="#1E2238"/>
+</linearGradient>
+</defs>
+</svg>

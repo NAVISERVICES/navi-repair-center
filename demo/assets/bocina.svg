@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Bocina">
+<path id="Vector" d="M120 220C164.183 220 200 216.418 200 212C200 207.582 164.183 204 120 204C75.8172 204 40 207.582 40 212C40 216.418 75.8172 220 120 220Z" fill="black" fill-opacity="0.1"/>
+<path id="Vector_2" d="M156 80H84C56.3858 80 34 102.386 34 130C34 157.614 56.3858 180 84 180H156C183.614 180 206 157.614 206 130C206 102.386 183.614 80 156 80Z" fill="url(#paint0_linear_0_28)"/>
+<g id="Vector_3">
+<path d="M70 90V170ZM92 84V176ZM114 82V178ZM136 82V178ZM158 84V176ZM180 92V168Z" fill="black"/>
+<path d="M70 90V170M92 84V176M114 82V178M136 82V178M158 84V176M180 92V168" stroke-width="9" stroke="white" stroke-opacity="0.07"/>
+</g>
+<path id="Vector_4" d="M214 114C214 109.582 210.418 106 206 106C201.582 106 198 109.582 198 114V146C198 150.418 201.582 154 206 154C210.418 154 214 150.418 214 146V114Z" fill="#ACE330"/>
+<path id="Vector_5" d="M136 130C136 138.837 128.837 146 120 146C111.163 146 104 138.837 104 130C104 121.163 111.163 114 120 114C128.837 114 136 121.163 136 130Z" stroke-width="3" stroke="white" stroke-opacity="0.35"/>
+<path id="Vector_6" d="M79 76H61C59.3431 76 58 77.3431 58 79C58 80.6569 59.3431 82 61 82H79C80.6569 82 82 80.6569 82 79C82 77.3431 80.6569 76 79 76Z" fill="#5A607A"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_28" x1="34" y1="80" x2="34" y2="180" gradientUnits="userSpaceOnUse">
+<stop stop-color="#3A3F55"/>
+<stop offset="1" stop-color="#11142A"/>
+</linearGradient>
+</defs>
+</svg>
