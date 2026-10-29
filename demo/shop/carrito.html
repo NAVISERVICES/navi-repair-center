@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tu carrito · Navi Shop</title>
+<meta name="theme-color" content="#1A247D">
+<link rel="icon" href="../assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../rc.css?v=1">
+<link rel="stylesheet" href="shop.css?v=1">
+<style>
+h1{font-size:clamp(30px,3.6vw,40px);margin-bottom:22px}
+.lay{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start;margin-bottom:64px}
+.items .it{display:grid;grid-template-columns:76px 1fr auto auto auto;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.items .it:first-child{padding-top:0}
+.items img{width:76px;height:76px;object-fit:contain;background:var(--bg);border-radius:14px;padding:8px}
+.items b{display:block}
+.items small{color:var(--text)}
+.items .tot{font-family:var(--display);font-weight:800;font-size:18px;min-width:80px;text-align:right}
+.items .del{font-size:18px;opacity:.7}
+.items .del:hover{opacity:1}
+.sum h2{font-size:22px;margin-bottom:14px}
+.sum .r{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:6px 0;color:var(--text)}
+.sum .r b{color:var(--ink)}
+.sum .total{border-top:1px solid var(--line);margin-top:8px;padding-top:14px;font-size:16px;color:var(--ink);font-weight:700}
+.sum .total b{font-family:var(--display);font-size:26px}
+.coupon{display:flex;gap:8px;margin:16px 0}
+.coupon input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:#F7F8FC}
+.empty{text-align:center;padding:30px 0}
+.done{text-align:center;padding:16px 0}
+.done .ok{width:72px;height:72px;margin:0 auto 14px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-size:34px;font-weight:800}
+@media (max-width:900px){.lay{grid-template-columns:1fr}}
+@media (max-width:560px){.items .it{grid-template-columns:60px 1fr auto;row-gap:10px}.items img{width:60px;height:60px}.items .qty{grid-column:2}.items .tot{grid-column:3;grid-row:1}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="crumb"><a href="index.html">Navi Shop</a> / <b>Carrito</b></div>
+  <h1>Tu carrito</h1>
+  <div class="lay">
+    <div class="card items" id="items"></div>
+    <aside class="card sum" id="sum"></aside>
+  </div>
+</main>
+<footer class="mini"><div class="wrap"><span>© 2026 Navi Repair Center</span><span>Aviso de privacidad · Términos y condiciones</span></div></footer>
+
+<script src="products.js?v=1"></script>
+<script src="shop.js?v=1"></script>
+<script>
+shopChrome();
+const $ = id => document.getElementById(id);
+let discount = 0;
+function render() {
+  const items = Cart.all().map(i => ({ ...i, p: prod(i.id) })).filter(i => i.p);
+  if (!items.length) {
+    $('items').innerHTML = '<div class="empty"><p class="muted" style="margin-bottom:16px">Tu carrito está vacío.</p><a class="btn btn-navy" href="index.html">Ver el catálogo</a></div>';
+    $('sum').hidden = true; return;
+  }
+  $('sum').hidden = false;
+  $('items').innerHTML = items.map(i => `<div class="it">
+      <img src="${imgOf(i.p)}" alt="">
+      <div><b><a href="producto.html#${i.p.id}">${esc(i.p.name)}</a>${i.color ? ' · ' + esc(i.color) : ''}</b><small>${mxn(i.p.price)} c/u</small></div>
+      <div class="qty"><button data-q="-1" data-id="${i.id}" data-c="${esc(i.color)}" aria-label="Menos">−</button><span>${i.qty}</span><button data-q="1" data-id="${i.id}" data-c="${esc(i.color)}" aria-label="Más">+</button></div>
+      <div class="tot">${mxn(i.p.price * i.qty)}</div>
+      <button class="del" data-del="${i.id}" data-c="${esc(i.color)}" aria-label="Quitar">🗑</button></div>`).join('')
+    + '<p style="margin-top:16px"><a href="index.html" style="font-weight:700;text-decoration:underline">Seguir comprando</a></p>';
+  const sub = items.reduce((s, i) => s + i.p.price * i.qty, 0), n = items.reduce((s, i) => s + i.qty, 0);
+  const off = Math.round(sub * discount);
+  $('sum').innerHTML = `<h2>Resumen del pedido</h2>
+    <div class="r"><span>Subtotal (${n} ${n === 1 ? 'artículo' : 'artículos'})</span><b>${mxn(sub)}</b></div>
+    ${off ? `<div class="r"><span>Descuento NAVI10</span><b>−${mxn(off)}</b></div>` : ''}
+    <div class="r"><span>Envío</span><b>Se calcula al pagar</b></div>
+    <div class="r total"><span>Total</span><b>${mxn(sub - off)}</b></div>
+    <form class="coupon" id="coupon"><input id="code" placeholder="Código de descuento" aria-label="Código de descuento"><button class="btn btn-line" style="padding:10px 16px">Aplicar</button></form>
+    <button class="btn btn-navy btn-block" id="pay">Continuar al pago</button>
+    <p class="muted" style="font-size:12px;margin-top:12px">Pago con tarjeta, transferencia o efectivo en tiendas de conveniencia. Prueba el código NAVI10 (demostración).</p>`;
+  $('coupon').onsubmit = e => { e.preventDefault(); if ($('code').value.trim().toUpperCase() === 'NAVI10') { discount = .10; render(); toast('Código aplicado: 10% de descuento'); } else toast('Ese código no es válido'); };
+  $('pay').onclick = () => {
+    const folio = 'NS-' + String(Date.now()).slice(-6);
+    Cart.clear();
+    $('items').innerHTML = `<div class="done"><div class="ok">✓</div><h2 style="font-size:26px">¡Pedido recibido!</h2><p class="muted" style="margin:8px 0">Folio <b>${folio}</b> · Total ${mxn(sub - off)}</p>
+      <p class="muted" style="margin-bottom:18px">Demostración: no se hizo ningún cobro. En la versión real aquí eliges tarjeta, transferencia o efectivo.</p><a class="btn btn-navy" href="index.html">Seguir comprando</a></div>`;
+    $('sum').hidden = true;
+  };
+}
+document.addEventListener('click', e => {
+  const q = e.target.closest('[data-q]'), d = e.target.closest('[data-del]');
+  if (q) { const it = Cart.all().find(i => i.id === q.dataset.id && i.color === q.dataset.c); if (it) { if (+q.dataset.q > 0 && it.qty >= prod(it.id).stock) toast(`Solo hay ${prod(it.id).stock} en bodega`); Cart.set(it.id, it.color, it.qty + +q.dataset.q); render(); } }
+  if (d) { Cart.remove(d.dataset.del, d.dataset.c); render(); }
+});
+render();
+</script>
+</body>
+</html>

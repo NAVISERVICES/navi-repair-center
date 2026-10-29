@@ -1,0 +1,27 @@
+/* Navi Shop (se apoya en ../rc.css) */
+body{background:var(--bg)}
+.btn-ink{background:#0B0C2A;color:#fff}
+.crumb{font-size:13px;color:var(--text);padding:22px 0 18px}
+.crumb a:hover{text-decoration:underline}
+.crumb b{color:var(--ink)}
+.cartlink{position:relative}
+.cartlink b{position:absolute;top:-6px;right:-10px;min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:var(--lime);color:var(--ink);font-size:11px;display:grid;place-items:center}
+.cartlink b[hidden]{display:none}
+/* tarjeta de producto */
+.pc{background:#fff;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.pc:hover{transform:translateY(-3px);box-shadow:0 14px 30px #1a247d14}
+.pc .ph{position:relative;height:230px;display:grid;place-items:center;border-bottom:1px solid var(--line)}
+.pc .ph img{width:200px;height:200px;object-fit:contain;background:#F7F7FA;border-radius:12px;padding:14px}
+.stk{position:absolute;top:14px;left:14px;background:#EEF8D6;color:#2F5200;font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px}
+.stk.low{background:#FFF4DD;color:#7A4B00}
+.pd{display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;flex:1}
+.pd small{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--text)}
+.pd b{font-size:16px;line-height:1.25}
+.pd .col{font-size:13px;color:var(--text)}
+.pd .pr{font-family:var(--display);font-weight:800;font-size:20px;margin-top:auto}
+.pd .btn{padding:11px 18px;font-size:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;background:#0B0C2A;color:#fff;font-weight:700;font-size:14px;padding:12px 18px;border-radius:14px;box-shadow:0 12px 30px #0005;z-index:70;transition:all .3s;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:99px;background:#fff}
+.qty button{width:38px;height:40px;font-size:18px;font-weight:700}
+.qty span{min-width:24px;text-align:center;font-weight:700}

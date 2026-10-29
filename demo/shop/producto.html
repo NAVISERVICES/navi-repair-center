@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Producto · Navi Shop</title>
+<meta name="theme-color" content="#1A247D">
+<link rel="icon" href="../assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../rc.css?v=1">
+<link rel="stylesheet" href="shop.css?v=1">
+<style>
+.pdp{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:start}
+.gal .big{background:#fff;border-radius:24px;aspect-ratio:1.3;display:grid;place-items:center}
+.gal .big img{width:58%}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+.thumbs button{background:#fff;border:2px solid var(--line);border-radius:14px;aspect-ratio:1.4;display:grid;place-items:center}
+.thumbs button[aria-pressed="true"]{border-color:var(--navy)}
+.thumbs img{width:56%}
+.info .tag{display:inline-block;background:var(--lime);color:var(--ink);font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px}
+.info .tag.low{background:#FFF4DD;color:#7A4B00}
+.info h1{font-size:clamp(28px,3vw,36px);margin:14px 0 10px}
+.info .brand{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--text)}
+.info .price{font-family:var(--display);font-weight:800;font-size:32px;color:var(--navy)}
+.info p.desc{color:var(--text);margin:14px 0 18px}
+.colors{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 20px}
+.colors button{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:99px;padding:7px 14px;font-weight:700;font-size:14px;background:#fff}
+.colors button[aria-pressed="true"]{border-color:var(--navy);box-shadow:0 0 0 2px #1A247D22}
+.colors i{width:14px;height:14px;border-radius:50%;border:1px solid #0002}
+.buy{display:flex;gap:12px;align-items:center}
+.buy .btn-navy{flex:1}
+.perks{background:#fff;border-radius:18px;padding:16px 18px;display:grid;gap:12px;margin-top:16px;font-size:13px;color:var(--text)}
+.perks b{display:block;color:var(--ink);font-size:14px}
+.perks div{display:grid;grid-template-columns:24px 1fr;gap:8px}
+.perks a{text-decoration:underline}
+.more{margin:48px 0 64px}
+.more h2{font-size:24px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media (max-width:980px){.pdp{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.grid{grid-template-columns:1fr}.buy{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<main class="wrap" id="main"></main>
+<footer class="mini"><div class="wrap"><span>© 2026 Navi Repair Center</span><span>Aviso de privacidad · Términos y condiciones</span></div></footer>
+
+<script src="products.js?v=1"></script>
+<script src="shop.js?v=1"></script>
+<script>
+shopChrome();
+const SWATCH = { negro: '#1B1C2E', blanco: '#F4F4F6', plata: '#C9CCD4', gris: '#8A8F9C', azul: '#2B57C9', rojo: '#D23A3A', verde: '#3A9A5B', aqua: '#4FD1C0', violeta: '#8A5CF5' };
+const sw = c => { const k = Object.keys(SWATCH).find(k => c.toLowerCase().includes(k)); return k ? SWATCH[k] : '#B9BCC8'; };
+const DESC = {
+  audifonos: 'Audífonos de diadema con sonido Bose, cómodos para todo el día. Conexión Bluetooth y estuche de viaje.',
+  inear: 'Audífonos in-ear ligeros y seguros, ideales para el día a día y el ejercicio.',
+  bocinas: 'Bocina con sonido amplio y conexión Bluetooth para llevar a donde vayas.',
+  lentes: 'Lentes de sol con audio integrado: escucha música y toma llamadas sin audífonos.',
+  pro: 'Equipo de audio profesional para instalaciones comerciales. Consulta con nuestro centro de servicio antes de comprar.',
+  celulares: 'Celular liberado, listo para usar con tu chip Navi o de cualquier compañía.',
+};
+function render() {
+  const p = prod(location.hash.slice(1)) || SHOP_PRODUCTS[0];
+  const c = catOf(p.cat);
+  document.title = `${p.name} · Navi Shop`;
+  const bgs = ['#fff', '#F7F7FA', '#EEF8D6', '#EEF0FF'];
+  document.getElementById('main').innerHTML = `
+    <div class="crumb"><a href="index.html">Navi Shop</a> / <a href="index.html#${p.cat === 'inear' ? 'audifonos' : p.cat}">${c.name}</a> / <b>${esc(p.name)}</b></div>
+    <div class="pdp">
+      <div class="gal"><div class="big" id="big"><img src="${imgOf(p)}" alt="${esc(p.name)}"></div>
+        <div class="thumbs">${bgs.map((b, k) => `<button aria-pressed="${!k}" data-bg="${b}" style="background:${b}" aria-label="Vista ${k + 1}"><img src="${imgOf(p)}" alt=""></button>`).join('')}</div></div>
+      <div class="info">
+        <span class="tag ${p.stock <= 1 ? 'low' : ''}">${p.stock <= 1 ? 'Última pieza' : p.cond}</span>
+        <h1>${esc(p.name)}</h1>
+        <div class="brand">${esc(p.brand)}${p.cond === 'Liberado' ? ' · LIBERADO' : ''} · ${p.stock <= 1 ? '1 pieza en bodega' : p.stock + ' piezas en bodega'}</div>
+        <div class="price" style="margin-top:10px">${mxn(p.price)}</div>
+        <p class="desc">${DESC[p.cat]}</p>
+        ${p.colors.length ? `<b style="font-size:14px">${p.cat === 'celulares' ? 'Opción' : 'Color'}</b><div class="colors" id="colors">${p.colors.map((x, k) => `<button aria-pressed="${!k}" data-c="${esc(x)}">${/GB/.test(x) ? '' : `<i style="background:${sw(x)}"></i>`}${esc(x)}</button>`).join('')}</div>` : ''}
+        <div class="buy"><div class="qty"><button id="minus" aria-label="Menos">−</button><span id="n">1</span><button id="plus" aria-label="Más">+</button></div>
+          <button class="btn btn-navy" id="add">Agregar al carrito</button></div>
+        <button class="btn btn-line btn-block" id="now" style="margin-top:12px">Comprar ahora</button>
+        <div class="perks">
+          <div><span>🚚</span><span><b>Envío a todo México</b>Llega en [DÍAS DE ENTREGA] días hábiles.</span></div>
+          <div><span>🛡️</span><span><b>Garantía</b>[PERIODO DE GARANTÍA] con nosotros.</span></div>
+          <div><span>🔧</span><span><b>Soporte de nuestro centro de servicio</b>Si algo falla, lo revisamos aquí mismo en <a href="../index.html">Navi Repair Center</a>.</span></div>
+        </div>
+      </div>
+    </div>
+    <section class="more"><h2>También te puede interesar</h2><div class="grid">${SHOP_PRODUCTS.filter(x => x.id !== p.id && x.cat === p.cat).concat(SHOP_PRODUCTS.filter(x => x.cat !== p.cat)).slice(0, 4).map(card).join('')}</div></section>`;
+  let qty = 1, color = p.colors[0] || '';
+  const n = document.getElementById('n');
+  document.getElementById('minus').onclick = () => { qty = Math.max(1, qty - 1); n.textContent = qty; };
+  document.getElementById('plus').onclick = () => { if (qty >= p.stock) { toast(`Solo hay ${p.stock} en bodega`); return; } qty++; n.textContent = qty; };
+  document.getElementById('colors')?.addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; color = b.dataset.c; document.querySelectorAll('#colors button').forEach(x => x.setAttribute('aria-pressed', x === b)); });
+  document.querySelector('.thumbs').addEventListener('click', e => { const b = e.target.closest('[data-bg]'); if (!b) return; document.getElementById('big').style.background = b.dataset.bg; document.querySelectorAll('.thumbs button').forEach(x => x.setAttribute('aria-pressed', x === b)); });
+  document.getElementById('add').onclick = () => { Cart.add(p.id, qty, color); toast(`Agregaste ${qty} × ${p.name}${color ? ' · ' + color : ''}`); };
+  document.getElementById('now').onclick = () => { Cart.add(p.id, qty, color); location.href = 'carrito.html'; };
+  scrollTo(0, 0);
+}
+addEventListener('hashchange', render);
+render();
+</script>
+</body>
+</html>

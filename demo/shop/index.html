@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Navi Shop · Bose y celulares liberados</title>
+<meta name="theme-color" content="#1A247D">
+<link rel="icon" href="../assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../rc.css?v=1">
+<link rel="stylesheet" href="shop.css?v=1">
+<style>
+.banner{background:var(--navy);color:#fff;border-radius:28px;padding:32px 40px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.banner small{font-size:13px;font-weight:700;letter-spacing:.14em;color:#ACE330}
+.banner h1{font-size:clamp(24px,2.6vw,30px);margin:8px 0}
+.banner p{color:#C9CCE8;font-size:15px}
+.banner .promo{background:#ACE330;color:#172000;font-weight:700;font-size:14px;padding:10px 18px;border-radius:99px;white-space:nowrap}
+.demo-note{font-size:12px;color:var(--text);margin:10px 0 0 6px}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:28px;margin:24px 0 64px;align-items:start}
+.filters{background:#fff;border-radius:20px;padding:20px;position:sticky;top:84px}
+.filters h2{font-size:18px;margin-bottom:12px}
+.filters h3{font-family:var(--body);font-size:13px;font-weight:700;margin:16px 0 8px;color:var(--ink)}
+.opt{display:flex;align-items:center;gap:10px;font-size:14px;padding:5px 0;cursor:pointer}
+.opt input{accent-color:var(--navy);width:16px;height:16px}
+.opt span{flex:1}
+.opt em{font-style:normal;font-size:12px;color:var(--muted)}
+.range{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.range input{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:9px 10px;font-size:14px;background:#F7F8FC}
+.filters .btn{margin-top:16px;width:100%;padding:10px}
+.search{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:0 18px;margin-bottom:22px}
+.search input{flex:1;border:0;outline:0;background:none;padding:13px 0;font-size:15px;min-width:0}
+.search:focus-within{border-color:var(--navy)}
+.cat{margin-bottom:34px}
+.cat .t{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.cat h2{font-size:24px}
+.cat .t span{background:#fff;font-size:12px;font-weight:700;color:var(--text);padding:4px 10px;border-radius:99px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+.empty{background:#fff;border-radius:20px;padding:40px;text-align:center;color:var(--text)}
+.ftoggle{display:none}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .filters{position:static;display:none}
+  .filters.open{display:block}
+  .ftoggle{display:inline-flex;margin-bottom:14px}
+  .banner{padding:24px}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="crumb"><b>Navi Shop</b></div>
+  <section class="banner">
+    <div><small>SHOP NAVI</small><h1>Bose y celulares liberados, con existencias en bodega</h1><p>Envío a todo México · Compra segura · Fotos de referencia del modelo</p></div>
+    <span class="promo" id="promo"></span>
+  </section>
+  <p class="demo-note">Demostración: precios de ejemplo e ilustraciones de referencia mientras se cargan las fotos de cada modelo.</p>
+  <div class="layout">
+    <aside class="filters" id="filters">
+      <h2>Filtrar</h2>
+      <h3>Categoría</h3><div id="fCat"></div>
+      <h3>Marca</h3><div id="fBrand"></div>
+      <h3>Precio</h3><div class="range"><input id="pMin" inputmode="numeric" placeholder="$ mín." aria-label="Precio mínimo"><input id="pMax" inputmode="numeric" placeholder="$ máx." aria-label="Precio máximo"></div>
+      <button class="btn btn-line" id="clear">Limpiar filtros</button>
+    </aside>
+    <div>
+      <button class="btn btn-line ftoggle" id="ftoggle">☰ Filtros</button>
+      <label class="search"><span aria-hidden="true">⌕</span><input id="q" placeholder="Buscar por modelo o marca" aria-label="Buscar"></label>
+      <div id="results"></div>
+    </div>
+  </div>
+</main>
+<footer class="mini"><div class="wrap"><span>© 2026 Navi Repair Center</span><span>Aviso de privacidad · Términos y condiciones</span></div></footer>
+
+<script src="products.js?v=1"></script>
+<script src="shop.js?v=1"></script>
+<script>
+shopChrome();
+const $ = id => document.getElementById(id);
+const pieces = SHOP_PRODUCTS.reduce((s, p) => s + p.stock, 0);
+$('promo').textContent = `${SHOP_PRODUCTS.length} modelos · ${pieces} piezas`;
+const brands = [...SHOP_PRODUCTS.reduce((m, p) => m.set(p.brand, (m.get(p.brand) || 0) + 1), new Map())].sort((a, b) => b[1] - a[1]);
+const title = s => s.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+$('fCat').innerHTML = SHOP_CATS.map(c => `<label class="opt"><input type="checkbox" value="${c.id}" data-f="cat"><span>${c.name}</span><em>${SHOP_PRODUCTS.filter(p => p.cat === c.id).length}</em></label>`).join('');
+$('fBrand').innerHTML = brands.map(([b, n]) => `<label class="opt"><input type="checkbox" value="${b}" data-f="brand"><span>${title(b)}</span><em>${n}</em></label>`).join('');
+let ofertas = false;
+
+const render = () => {
+  const cats = [...document.querySelectorAll('[data-f=cat]:checked')].map(i => i.value);
+  const brs = [...document.querySelectorAll('[data-f=brand]:checked')].map(i => i.value);
+  const min = +$('pMin').value.replace(/\D/g, '') || 0, max = +$('pMax').value.replace(/\D/g, '') || Infinity;
+  const q = $('q').value.trim().toLowerCase();
+  const list = SHOP_PRODUCTS.filter(p => (!cats.length || cats.includes(p.cat)) && (!brs.length || brs.includes(p.brand))
+    && p.price >= min && p.price <= max && (!q || (p.name + ' ' + p.brand).toLowerCase().includes(q)) && (!ofertas || p.stock <= 1));
+  const groups = SHOP_CATS.map(c => [c, list.filter(p => p.cat === c.id)]).filter(([, l]) => l.length);
+  $('results').innerHTML = (ofertas ? '<div class="cat"><div class="t"><h2>Ofertas · últimas piezas</h2><span><a href="index.html" id="allLink">Ver todo</a></span></div></div>' : '')
+    + (groups.length ? groups.map(([c, l]) => `<section class="cat" id="cat-${c.id}"><div class="t"><h2>${c.name}</h2><span>${l.length} ${l.length === 1 ? 'modelo' : 'modelos'}</span></div><div class="grid">${l.map(card).join('')}</div></section>`).join('')
+      : '<div class="empty">No encontramos modelos con esos filtros. <button class="btn btn-line" style="margin-left:8px" onclick="document.getElementById(\'clear\').click()">Limpiar filtros</button></div>');
+};
+document.querySelectorAll('[data-f]').forEach(i => i.addEventListener('change', render));
+['pMin', 'pMax', 'q'].forEach(id => $(id).addEventListener('input', render));
+$('clear').onclick = () => { document.querySelectorAll('[data-f]').forEach(i => i.checked = false); $('pMin').value = $('pMax').value = $('q').value = ''; ofertas = false; render(); };
+$('ftoggle').onclick = () => $('filters').classList.toggle('open');
+
+// enlaces del menú: #audifonos, #bocinas, #celulares, #pro, #ofertas, #buscar
+const fromHash = () => {
+  const h = location.hash.slice(1);
+  document.querySelectorAll('[data-f]').forEach(i => i.checked = false); ofertas = false;
+  if (h === 'ofertas') ofertas = true;
+  else if (h === 'audifonos') document.querySelectorAll('[data-f=cat]').forEach(i => i.checked = ['audifonos', 'inear'].includes(i.value));
+  else if (SHOP_CATS.some(c => c.id === h)) document.querySelector(`[data-f=cat][value="${h}"]`).checked = true;
+  render();
+  if (h === 'buscar') $('q').focus();
+};
+addEventListener('hashchange', fromHash);
+fromHash();
+</script>
+</body>
+</html>
