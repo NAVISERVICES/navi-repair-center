@@ -2,7 +2,7 @@
 // DEMO: tickets y sesión viven en este navegador; en producción los entrega el sistema de servicio.
 
 const NAVI_MOVIL = 'https://www.navimovil.com/demo/';
-const NAVI_SHOP = 'https://www.figma.com/proto/gVPCzk4YxUzBBllPbeZhnj/Navi-Repair-Center-%E2%80%93-Sitio-web?node-id=15-474&starting-point-node-id=15-474';
+const NAVI_SHOP = 'shop/';
 
 // cliente de demostración: entra con el ticket 560 (o el folio completo) y su correo
 const RC_CLIENTS = [{
@@ -43,7 +43,7 @@ function rcChrome(active) {
   const user = RC.current();
   document.body.insertAdjacentHTML('afterbegin', `
   <div class="sections"><div class="wrap"><span>⌂ Todo Navi</span>
-    <nav><a href="${NAVI_MOVIL}">📱 Navi Móvil →</a><a class="on" href="index.html">🔧 Navi Repair Center · estás aquí</a><a href="${NAVI_SHOP}" target="_blank" rel="noopener">🛍️ Navi Shop →</a></nav></div></div>
+    <nav><a href="${NAVI_MOVIL}">📱 Navi Móvil →</a><a class="on" href="index.html">🔧 Navi Repair Center · estás aquí</a><a href="${NAVI_SHOP}">🛍️ Navi Shop →</a></nav></div></div>
   <header class="main"><div class="wrap">
     <a class="logo" href="index.html"><img src="assets/navi-logo.png" alt="Navi"><small>REPAIR CENTER</small></a>
     <nav class="menu">
