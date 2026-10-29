@@ -1,0 +1,71 @@
+/* Navi Repair Center: estilos compartidos (colores y tipografía del diseño en Figma) */
+:root{
+  --navy:#1A247D; --navy-2:#141C66; --ink:#0E1238; --text:#4A4D72; --muted:#7A7DA0;
+  --line:#DADCE8; --bg:#F3F4F8; --card:#FFFFFF; --lime:#B4E32F; --lime-soft:#EEF8D6;
+  --warn:#FFF4DB; --warn-line:#F2D59A; --warn-ink:#7A5400; --bad:#D6455D;
+  --display:"Sora", system-ui, sans-serif; --body:"DM Sans", system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{font-family:var(--body);color:var(--ink);background:var(--card);line-height:1.5}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+.wrap{width:min(1240px,100% - 32px);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:1.08}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy)}
+.muted{color:var(--text)}
+
+/* barra de secciones Navi */
+.sections{background:var(--ink);color:#fff;font-size:12px}
+.sections .wrap{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:30px}
+.sections nav{display:flex;gap:6px}
+.sections nav a{padding:3px 12px;border:1px solid #ffffff40;border-radius:99px;white-space:nowrap}
+.sections nav a.on{background:var(--lime);color:var(--ink);border-color:var(--lime);font-weight:700}
+/* encabezado */
+header.main{background:var(--navy);color:#fff;position:sticky;top:0;z-index:30}
+header.main .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{height:34px;width:auto}
+.logo small{font-size:11px;font-weight:700;letter-spacing:.18em;padding-left:12px;border-left:1px solid #ffffff55}
+.menu{display:flex;gap:6px;margin-inline:auto;font-size:14px}
+.menu a{padding:8px 14px;border-radius:99px}
+.menu a.on,.menu a:hover{background:#ffffff1f}
+.hdr-icons{display:flex;gap:14px;font-size:18px}
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:99px;font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.45;pointer-events:none}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-lime{background:var(--lime);color:var(--ink)}
+.btn-line{border:2px solid var(--ink)}
+.btn-block{width:100%}
+/* tarjetas y formularios */
+.card{background:var(--card);border-radius:24px;padding:28px}
+.field{display:grid;gap:6px;font-size:14px;font-weight:700}
+.field input,.field select,.field textarea{font-weight:400;background:#F7F8FC;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 4px #1A247D1a}
+.field input[readonly]{background:#E9EBF3;font-weight:700}
+.note{display:flex;gap:10px;align-items:flex-start;background:var(--warn);border:1px solid var(--warn-line);color:var(--warn-ink);border-radius:14px;padding:12px 14px;font-size:13px}
+.note.bad{background:#FDECEF;border-color:#F3B9C3;color:#8E1F33}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--lime-soft);color:#3D5A00;white-space:nowrap}
+.pill.oow{background:#FFF1D6;color:#8A5A00}
+.pill.done{background:#ECEDF3;color:var(--text)}
+/* sello autorizado */
+.seal{display:inline-flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 20px 12px 16px;max-width:100%}
+@media (max-width:560px){.seal{flex-wrap:wrap;gap:12px}.seal i{display:none}}
+.seal .t small{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--text)}
+.seal .t b{font-family:var(--display);font-size:15px;color:var(--navy);letter-spacing:.04em}
+.seal i{width:1px;height:36px;background:var(--line)}
+.seal .bose{height:15px;width:auto}
+.seal .delonghi{height:32px;width:auto}
+/* pie */
+footer.mini{background:var(--navy);color:#C9CCEA;font-size:13px}
+footer.mini .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:22px}
+.demo-tag{position:fixed;left:12px;bottom:12px;z-index:50;background:var(--ink);color:var(--lime);font-size:11px;font-weight:700;padding:5px 10px;border-radius:99px;opacity:.85}
+@media (max-width:860px){
+  .menu{display:none}
+  .sections nav a:not(.on){display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

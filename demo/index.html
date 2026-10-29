@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Navi Repair Center · Centro de servicio autorizado</title>
+<meta name="theme-color" content="#1A247D">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="rc.css?v=1">
+<style>
+/* hero */
+.hero{padding:56px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(40px,5.4vw,68px);margin:12px 0 18px}
+.hero p{max-width:520px;color:var(--text);font-size:17px}
+.checks{display:flex;gap:18px;flex-wrap:wrap;margin:22px 0;font-size:13px;color:var(--text)}
+.checks span::before{content:"✓ ";color:#5C8A00;font-weight:800}
+.stage{position:relative;background:var(--bg);border-radius:32px;aspect-ratio:1.25;display:grid;place-items:center;overflow:hidden}
+.stage::before{content:"";position:absolute;top:-40px;right:30px;width:150px;height:150px;border-radius:50%;background:var(--lime)}
+.stage img{position:relative;width:62%;animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+.stage .folio{position:absolute;left:28px;bottom:36px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 12px 30px #1a247d22;font-size:11px;color:var(--text)}
+.stage .folio b{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink)}
+.stage .folio b::before{content:"";width:8px;height:8px;border-radius:50%;background:#5CB800}
+/* centro de servicio */
+.center{background:var(--navy);color:#fff;padding:72px 0}
+.center .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:start}
+.center .eyebrow{color:var(--lime)}
+.center h2{font-size:clamp(30px,3.6vw,44px);margin:18px 0 14px}
+.center p{color:#C9CCEA}
+.steps{list-style:none;display:grid;gap:16px;margin-top:26px}
+.steps li{display:grid;grid-template-columns:32px 1fr;gap:12px}
+.steps b{display:block}
+.steps span{color:#C9CCEA;font-size:13px}
+.steps .n{width:28px;height:28px;border-radius:50%;background:var(--lime);color:var(--ink);display:grid;place-items:center;font-weight:800;font-size:13px}
+.access{color:var(--ink);box-shadow:0 30px 60px #0006}
+.access h3{display:flex;align-items:center;gap:10px;font-size:20px;margin-bottom:8px}
+.access form{display:grid;gap:14px;margin:18px 0}
+/* por qué */
+.why{padding:72px 0}
+.why h2{font-size:clamp(28px,3vw,36px);margin-bottom:28px}
+.why .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.why .ico{width:44px;height:44px;border-radius:12px;background:var(--bg);display:grid;place-items:center;font-size:20px;margin-bottom:14px}
+.why b{display:block;margin-bottom:6px}
+.why p{font-size:14px;color:var(--text)}
+/* visítanos + faq */
+.visit{background:var(--bg);padding:64px 0}
+.visit .wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:28px;align-items:start}
+.visit ul{list-style:none;display:grid;gap:12px;margin:16px 0 20px;font-size:14px;color:var(--text)}
+.visit h2{font-size:28px}
+details{background:#fff;border-radius:16px;padding:16px 20px;margin-top:12px}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";font-size:20px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;font-size:14px;color:var(--text)}
+/* pie grande */
+.foot{background:var(--navy);color:#C9CCEA;padding:56px 0 24px}
+.news{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-bottom:36px;border-bottom:1px solid #ffffff22}
+.news h3{color:#fff;font-size:22px;max-width:480px}
+.news form{display:flex;gap:10px;flex-wrap:wrap}
+.news input{background:#fff;border:0;border-radius:99px;padding:13px 18px;min-width:260px;color:var(--ink)}
+.cols{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:28px;padding:36px 0;font-size:14px}
+.cols h4{color:#fff;margin-bottom:12px;font-size:14px}
+.cols ul{list-style:none;display:grid;gap:8px}
+.copy{font-size:12px}
+@media (max-width:980px){
+  .hero .wrap,.center .wrap,.visit .wrap{grid-template-columns:1fr}
+  .why .grid{grid-template-columns:repeat(2,1fr)}
+  .cols{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){.why .grid,.cols{grid-template-columns:1fr}.news input{min-width:0;flex:1}}
+</style>
+</head>
+<body>
+<section class="hero"><div class="wrap">
+  <div>
+    <span class="eyebrow">Navi Repair Center</span>
+    <h1>Tu sonido y tu café, como el primer día.</h1>
+    <p>Centro de servicio autorizado BOSE y De'Longhi. Consulta el estatus de tu reparación, tu historial y abre tickets fuera de garantía.</p>
+    <div style="margin-top:26px"><a class="btn btn-navy" href="#acceso">Entrar al Centro de servicio</a></div>
+    <div class="checks"><span>Guía prepagada</span><span>Técnicos especializados</span><span>Seguimiento en línea</span></div>
+    <div class="seal"><img src="assets/escudo.svg" alt="" width="28" height="28"><div class="t"><small>CENTRO DE SERVICIO</small><b>AUTORIZADO</b></div><i></i><img class="bose" src="assets/bose.png" alt="BOSE"><img class="delonghi" src="assets/delonghi.png" alt="De'Longhi"></div>
+  </div>
+  <div class="stage"><img src="assets/audifonos.svg" alt="Audífonos en reparación"><div class="folio">FOLIO W20260907171032_560<b>Reparación en curso</b></div></div>
+</div></section>
+
+<section class="center" id="acceso"><div class="wrap">
+  <div>
+    <span class="eyebrow">Centro de servicio</span>
+    <div style="margin-top:14px"><div class="seal"><img src="assets/escudo.svg" alt="" width="28" height="28"><div class="t"><small>CENTRO DE SERVICIO</small><b>AUTORIZADO</b></div><i></i><img class="bose" src="assets/bose.png" alt="BOSE"><img class="delonghi" src="assets/delonghi.png" alt="De'Longhi"></div></div>
+    <h2>Centro de servicio autorizado BOSE y De'Longhi.</h2>
+    <p>Reparamos equipos de audio y cafeteras con refacciones de la marca. Con o sin garantía, te decimos qué tiene tu equipo antes de repararlo.</p>
+    <ol class="steps">
+      <li><span class="n">1</span><div><b>Registra tu servicio</b><span>En garantía: con el call center de tu marca, que te asigna un número de ticket. Fuera de garantía: aquí mismo, desde tu cuenta.</span></div></li>
+      <li><span class="n">2</span><div><b>Envía tu equipo</b><span>Te mandamos una guía prepagada o lo llevas directo al centro.</span></div></li>
+      <li><span class="n">3</span><div><b>Diagnóstico</b><span>Validamos el producto y su garantía, y te decimos qué necesita.</span></div></li>
+      <li><span class="n">4</span><div><b>Reparación</b><span>Lo reparamos con refacciones de la marca o, si aplica, lo cambiamos por uno nuevo.</span></div></li>
+      <li><span class="n">5</span><div><b>De vuelta a casa</b><span>Te enviamos tu equipo y sigues cada paso en línea con tu folio.</span></div></li>
+    </ol>
+  </div>
+  <div class="card access">
+    <h3>🔒 Accede a tu Centro de servicio</h3>
+    <p class="muted" style="font-size:14px">Usa el número de ticket que te asignó el call center y el correo con el que te registraste. Te enviaremos un código de acceso.</p>
+    <form id="quick" novalidate>
+      <label class="field">Número de ticket<input id="qT" placeholder="Ej. 560 o W20260907171032_560" autocomplete="off"></label>
+      <label class="field">Correo electrónico<input id="qE" type="email" placeholder="El correo con el que te registraste" autocomplete="email"></label>
+      <button class="btn btn-navy btn-block">Enviar código de acceso</button>
+    </form>
+    <div class="note">ⓘ <span>¿Tu equipo tiene garantía? Abre tu servicio con el call center de la marca. Desde este portal solo se crean tickets nuevos fuera de garantía.</span></div>
+  </div>
+</div></section>
+
+<section class="why"><div class="wrap">
+  <h2>¿Por qué Navi Repair Center?</h2>
+  <div class="grid">
+    <div><div class="ico">🔧</div><b>Técnicos especializados</b><p>Diagnóstico y reparación hechos por técnicos capacitados en audio y café.</p></div>
+    <div><div class="ico">📋</div><b>Trazabilidad completa</b><p>Cada servicio tiene folio y puedes ver su estado en todo momento.</p></div>
+    <div><div class="ico">🚚</div><b>Envío a todo México</b><p>Guía prepagada para mandar tu equipo y regresarlo a tu puerta.</p></div>
+    <div><div class="ico">🛡️</div><b>Garantía en la reparación</b><p>Tu reparación está respaldada por [PERIODO DE GARANTÍA].</p></div>
+  </div>
+</div></section>
+
+<section class="visit" id="ayuda"><div class="wrap">
+  <div class="card">
+    <h2>Visítanos</h2>
+    <ul><li>📍 Albino García 350, Col. Viaducto Piedad, Iztacalco, C.P. 08200, Ciudad de México</li><li>🕘 Lunes a viernes de 9:00 a. m. a 5:00 p. m.</li><li>📞 [TELÉFONO]</li><li>✉️ [CORREO DE SERVICIO]</li></ul>
+    <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=Albino+Garc%C3%ADa+350+Viaducto+Piedad+Iztacalco+CDMX" target="_blank" rel="noopener">Cómo llegar</a>
+  </div>
+  <div>
+    <h2 style="font-size:28px">Preguntas frecuentes</h2>
+    <details><summary>¿Cuánto tarda una reparación?</summary><p>Normalmente de 5 a 10 días hábiles desde que recibimos tu equipo, según el diagnóstico y las refacciones.</p></details>
+    <details open><summary>¿Qué pasa si mi equipo tiene garantía?</summary><p>Los servicios en garantía se abren con el call center de cada marca, que te asigna un número de ticket. Con ese ticket y tu correo entras a tu Centro de servicio para ver el estatus.</p></details>
+    <details><summary>¿Cómo envío mi equipo?</summary><p>Al crear tu ticket eliges guía prepagada (te la mandamos por correo) o llevarlo tú al centro en Iztacalco.</p></details>
+  </div>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="news"><h3>Recibe avisos y consejos para cuidar tus equipos.</h3>
+    <form id="news"><input type="email" required placeholder="tu@correo.com" aria-label="Correo"><button class="btn btn-lime">Suscribirme</button></form></div>
+  <div class="cols">
+    <div><img src="assets/navi-logo.png" alt="Navi" style="height:34px;margin-bottom:12px"><p>Navi Repair Center: centro de servicio autorizado BOSE y De'Longhi.</p></div>
+    <div><h4>Servicio técnico</h4><ul><li><a href="acceso.html">Solicitar servicio</a></li><li><a href="acceso.html">Rastrear mi servicio</a></li><li><a href="#ayuda">Garantías</a></li><li><a href="#acceso">Centro de servicio</a></li></ul></div>
+    <div><h4>Ayuda</h4><ul><li><a href="#ayuda">Preguntas frecuentes</a></li><li><a href="#ayuda">Envíos</a></li><li><a href="#ayuda">Devoluciones</a></li><li><a href="#ayuda">Contacto</a></li></ul></div>
+    <div><h4>Navi</h4><ul><li><a href="https://www.navimovil.com/demo/">Navi Móvil</a></li><li><a href="#">Navi Services</a></li><li><a href="#">Aviso de privacidad</a></li><li><a href="#">Términos y condiciones</a></li></ul></div>
+  </div>
+  <p class="copy">© 2026 Navi Repair Center. Todos los derechos reservados.</p>
+</div></footer>
+
+<script src="rc.js?v=1"></script>
+<script>
+rcChrome('centro');
+// el formulario rápido lleva al acceso con los datos ya escritos
+document.getElementById('quick').addEventListener('submit', e => {
+  e.preventDefault();
+  try { sessionStorage.setItem('navirc.prefill', JSON.stringify({ t: qT.value, e: qE.value })); } catch {}
+  location.href = 'acceso.html#enviar';
+});
+document.getElementById('news').addEventListener('submit', e => { e.preventDefault(); e.target.innerHTML = '<b style="color:#fff">¡Listo! Te escribiremos pronto.</b>'; });
+</script>
+</body>
+</html>

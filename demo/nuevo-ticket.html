@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Nuevo ticket · Navi Repair Center</title>
+<meta name="theme-color" content="#1A247D">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="rc.css?v=1">
+<script src="rc.js?v=1"></script>
+<script>if (!RC.current()) location.replace('acceso.html');</script>
+<style>
+body{background:var(--bg)}
+main{padding:32px 0 64px}
+.back{display:inline-flex;gap:6px;font-weight:700;font-size:14px;color:var(--navy);margin-bottom:14px}
+h1{font-size:clamp(30px,3.6vw,40px);margin-bottom:18px}
+.grid{display:grid;grid-template-columns:2.6fr 1fr;gap:20px;align-items:start;margin-top:20px}
+h2{font-size:20px;margin-bottom:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+form{display:grid;gap:16px}
+.drop{border:2px dashed var(--line);border-radius:14px;padding:18px;text-align:center;font-size:14px;color:var(--text);cursor:pointer}
+.drop:hover{border-color:var(--navy)}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.thumbs img{width:56px;height:56px;object-fit:cover;border-radius:10px}
+.ship{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ship label{border:2px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;font-size:13px;color:var(--text)}
+.ship label b{display:block;font-size:15px;color:var(--ink)}
+.ship label:has(input:checked){border-color:#8CC81E;background:var(--lime-soft)}
+.ship input{position:absolute;opacity:0}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.chk input{width:18px;height:18px;accent-color:var(--navy);margin-top:2px}
+.next ol{list-style:none;display:grid;gap:14px}
+.next li{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:13px;color:var(--text)}
+.next li b{display:block;color:var(--ink);font-size:14px}
+.next .n{width:24px;height:24px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-weight:800;font-size:12px;color:var(--ink)}
+.err{color:var(--bad);font-size:13px;min-height:18px}
+.done{text-align:center;padding:24px 0}
+.done .ok{width:72px;height:72px;margin:0 auto 14px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-size:34px;font-weight:800}
+.done h2{font-size:26px}
+@media (max-width:980px){.grid{grid-template-columns:1fr}}
+@media (max-width:560px){.two,.ship{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="back" href="cuenta.html">‹ Volver a mis reparaciones</a>
+  <h1>Nuevo ticket fuera de garantía</h1>
+  <div class="note">ⓘ <span>Este formulario es solo para equipos sin garantía (OOW). Si tu equipo está en garantía, el servicio debe abrirse con el call center de la marca, que te asignará un número de ticket.</span></div>
+  <div class="grid">
+    <div class="card" id="formCard">
+      <form id="f" novalidate>
+        <h2 style="margin:0">Datos del equipo</h2>
+        <div class="two">
+          <label class="field">Categoría del equipo<select id="cat" required><option value="">Selecciona</option><option value="audifonos">Audífonos</option><option value="inear">Audífonos in-ear</option><option value="bocina">Bocina portátil</option><option value="barra">Barra de sonido</option><option value="cafetera">Cafetera</option></select></label>
+          <label class="field">Marca<select id="brand" required><option value="">Selecciona</option><option>BOSE</option><option>De'Longhi</option></select></label>
+          <label class="field">Modelo<input id="model" required placeholder="Ej. modelo en la etiqueta"></label>
+          <label class="field">Número de serie<input id="serial" required placeholder="Está en la etiqueta o la caja"></label>
+          <label class="field">Fecha de compra (aproximada)<input id="date" type="date"></label>
+          <label class="field">Modalidad<input value="SIN GARANTÍA | OOW 🔒" readonly></label>
+        </div>
+        <label class="field">Describe la falla<textarea id="fail" rows="3" required placeholder="Ej. No enciende, se escucha un solo lado, la cafetera gotea..."></textarea></label>
+        <div class="field">Fotos del equipo (opcional)
+          <label class="drop" for="photos">⬆ Arrastra tus fotos o haz clic para subirlas</label>
+          <input type="file" id="photos" accept="image/*" multiple hidden>
+          <div class="thumbs" id="thumbs"></div>
+        </div>
+        <h2 style="margin:8px 0 0">Envío del equipo</h2>
+        <div class="ship">
+          <label><input type="radio" name="ship" value="guia" checked><b>Guía prepagada</b>Te la enviamos por correo</label>
+          <label><input type="radio" name="ship" value="centro"><b>Lo llevo al centro</b>Iztacalco, Ciudad de México</label>
+        </div>
+        <label class="field" id="addrF">Dirección de recolección y entrega<input id="addr" placeholder="Calle, número, colonia, C.P., ciudad"></label>
+        <label class="chk"><input type="checkbox" id="ok" required><span>Acepto que el diagnóstico tiene un costo de [COSTO DE DIAGNÓSTICO] y el aviso de privacidad.</span></label>
+        <p class="err" id="err"></p>
+        <button class="btn btn-navy btn-block">Crear ticket</button>
+      </form>
+    </div>
+    <aside class="card next"><h2>¿Qué sigue?</h2><ol>
+      <li><span class="n">1</span><div><b>Recibes tu folio</b>Te llega por correo y aparece en tu historial.</div></li>
+      <li><span class="n">2</span><div><b>Envías tu equipo</b>Con la guía prepagada o en el centro.</div></li>
+      <li><span class="n">3</span><div><b>Diagnóstico y cotización</b>Te enviamos la cotización para que la autorices.</div></li>
+      <li><span class="n">4</span><div><b>Reparación y regreso</b>Sigues cada etapa desde tu cuenta.</div></li>
+    </ol></aside>
+  </div>
+</main>
+<footer class="mini"><div class="wrap"><span>© 2026 Navi Repair Center</span><span>Aviso de privacidad · Términos y condiciones</span></div></footer>
+
+<script>
+if (RC.current()) {
+  rcChrome('centro');
+  const $ = id => document.getElementById(id);
+  const NAMES = { audifonos: 'Audífonos', inear: 'Audífonos in-ear', bocina: 'Bocina portátil', barra: 'Barra de sonido', cafetera: 'Cafetera' };
+  // vista previa de fotos (no se suben en la demostración)
+  $('photos').addEventListener('change', e => {
+    $('thumbs').innerHTML = '';
+    [...e.target.files].slice(0, 6).forEach(f => { const i = new Image(); i.src = URL.createObjectURL(f); i.alt = ''; $('thumbs').append(i); });
+  });
+  const drop = document.querySelector('.drop');
+  ['dragover', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); if (ev === 'drop') { $('photos').files = e.dataTransfer.files; $('photos').dispatchEvent(new Event('change')); } }));
+  document.querySelectorAll('[name=ship]').forEach(r => r.addEventListener('change', () => $('addrF').hidden = r.value === 'centro' && r.checked));
+
+  $('f').addEventListener('submit', e => {
+    e.preventDefault();
+    const guia = document.querySelector('[name=ship]:checked').value === 'guia';
+    const missing = [['cat', 'la categoría'], ['brand', 'la marca'], ['model', 'el modelo'], ['serial', 'el número de serie'], ['fail', 'la falla']].find(([id]) => !$(id).value.trim());
+    if (missing) { $('err').textContent = `Falta ${missing[1]}.`; $(missing[0]).focus(); return; }
+    if (guia && !$('addr').value.trim()) { $('err').textContent = 'Falta la dirección para la guía prepagada.'; $('addr').focus(); return; }
+    if (!$('ok').checked) { $('err').textContent = 'Acepta el costo de diagnóstico y el aviso de privacidad.'; return; }
+    const d = new Date(), pad = n => String(n).padStart(2, '0');
+    const id = String(Math.floor(600 + Math.random() * 300));
+    const folio = `W${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}_${id}`;
+    RC.addTicket({ folio, ticket: id, fecha: `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`, equipo: NAMES[$('cat').value], img: $('cat').value,
+      marca: $('brand').value, modelo: $('model').value.trim(), serie: $('serial').value.trim(), modalidad: 'oow', servicio: 'REPARACIÓN', estatus: 'Ticket creado', paso: 0,
+      pasos: [`${pad(d.getDate())} ${d.toLocaleDateString('es-MX', { month: 'short' }).replace('.', '')}`], act: d.toLocaleString('es-MX', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+      nota: guia ? 'Recibimos tu ticket. Te enviamos la guía prepagada por correo para que nos mandes tu equipo.' : 'Recibimos tu ticket. Lleva tu equipo al centro en Iztacalco con tu folio.' });
+    $('formCard').innerHTML = `<div class="done"><div class="ok">✓</div><h2>¡Ticket creado!</h2><p class="muted" style="margin:8px 0 4px">Tu folio es</p>
+      <p style="font-family:var(--display);font-weight:800;font-size:20px;word-break:break-all">${folio}</p>
+      <p class="muted" style="margin:10px 0 18px">${guia ? 'Te enviamos la guía prepagada por correo (demostración).' : 'Llévalo al centro de lunes a viernes de 9:00 a 17:00.'}</p>
+      <a class="btn btn-navy" href="cuenta.html">Ver mis reparaciones</a></div>`;
+    scrollTo(0, 0);
+  });
+}
+</script>
+</body>
+</html>

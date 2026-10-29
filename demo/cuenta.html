@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mi cuenta · Navi Repair Center</title>
+<meta name="theme-color" content="#1A247D">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="rc.css?v=1">
+<script src="rc.js?v=1"></script>
+<script>if (!RC.current()) location.replace('acceso.html');</script>
+<style>
+body{background:var(--bg)}
+main{padding:40px 0 64px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.top h1{font-size:clamp(30px,3.6vw,40px)}
+.top .acts{display:flex;gap:12px;flex-wrap:wrap}
+.tabs{display:flex;gap:24px;border-bottom:1px solid var(--line);margin:24px 0 24px;overflow-x:auto}
+.tabs button{padding:10px 0;font-weight:700;color:var(--text);border-bottom:3px solid transparent;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--navy)}
+.grid{display:grid;grid-template-columns:2.6fr 1fr;gap:20px;align-items:start}
+.cur h2,.hist h2,.dev h2{font-size:22px}
+.cur .hd{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}
+.kv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.kv div{background:var(--bg);border-radius:12px;padding:10px 12px}
+.kv small{display:block;font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--text)}
+.kv b{font-size:14px;word-break:break-word}
+.track{display:grid;grid-template-columns:repeat(6,1fr);margin:28px 0 20px;position:relative}
+.track div{display:grid;justify-items:center;gap:4px;text-align:center;font-size:12px;position:relative}
+.track div::before{content:"";position:absolute;top:13px;left:-50%;width:100%;height:3px;background:var(--line);z-index:0}
+.track div:first-child::before{display:none}
+.track div.ok::before,.track div.now::before{background:#8CC81E}
+.track i{position:relative;z-index:1;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:800;background:#fff;border:2px solid var(--line)}
+.track .ok i{background:var(--lime);border-color:var(--lime)}
+.track .now i{border-color:var(--navy);border-width:3px}
+.track .now i::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--navy)}
+.track b{font-size:12px}
+.track span{color:var(--muted)}
+.upd{background:var(--bg);border-radius:14px;padding:12px 14px;font-size:14px}
+.upd small{display:block;font-weight:700;color:var(--text)}
+.dev .pic{background:var(--bg);border-radius:18px;display:grid;place-items:center;padding:18px;margin-bottom:16px}
+.dev .pic img{width:70%}
+.dev dl{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;font-size:14px;margin:12px 0 16px}
+.dev dt{color:var(--text)}
+.dev dd{text-align:right;font-weight:700}
+.hist{margin-top:20px}
+.tbl{overflow-x:auto;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:720px}
+th{background:var(--bg);text-align:left;font-size:11px;letter-spacing:.1em;color:var(--text);padding:12px}
+th:first-child{border-radius:10px 0 0 10px}th:last-child{border-radius:0 10px 10px 0}
+td{padding:16px 12px;border-bottom:1px solid var(--line)}
+td:first-child{font-weight:700}
+.datos{max-width:560px;display:grid;gap:14px}
+.ok-msg{color:#3D7A00;font-weight:700;font-size:14px}
+section[data-tab]{display:none}section[data-tab].on{display:block}
+@media (max-width:980px){.grid{grid-template-columns:1fr}}
+@media (max-width:620px){.kv{grid-template-columns:1fr 1fr}.track{grid-template-columns:repeat(3,1fr);row-gap:16px}.track div::before{display:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="top">
+    <div><h1 id="hello"></h1><p class="muted" id="sub"></p></div>
+    <div class="acts"><a class="btn btn-lime" href="nuevo-ticket.html">Nuevo ticket fuera de garantía</a><button class="btn btn-line" id="logout">Cerrar sesión</button></div>
+  </div>
+  <div class="tabs" role="tablist">
+    <button data-t="reparaciones" aria-selected="true">Mis reparaciones</button>
+    <button data-t="historial" aria-selected="false">Historial</button>
+    <a href="nuevo-ticket.html" style="padding:10px 0;font-weight:700;color:var(--text)">Nuevo ticket</a>
+    <button data-t="datos" aria-selected="false">Mis datos</button>
+  </div>
+
+  <section data-tab="reparaciones" class="on">
+    <div class="grid">
+      <div class="card cur" id="cur"></div>
+      <div class="card dev" id="dev"></div>
+    </div>
+    <div class="card hist"><h2>Historial de reparaciones</h2><div class="tbl" id="tbl1"></div></div>
+  </section>
+  <section data-tab="historial"><div class="card hist" style="margin-top:0"><h2>Historial de reparaciones</h2><div class="tbl" id="tbl2"></div></div></section>
+  <section data-tab="datos"><div class="card">
+    <h2 style="font-size:22px;margin-bottom:16px">Mis datos</h2>
+    <form class="datos" id="datos">
+      <label class="field">Nombre<input id="dN"></label>
+      <label class="field">Correo electrónico<input id="dE" readonly></label>
+      <label class="field">Celular<input id="dP" inputmode="tel" placeholder="55 1234 5678"></label>
+      <label class="field">Dirección de recolección y entrega<input id="dA" placeholder="Calle, número, colonia, C.P., ciudad"></label>
+      <button class="btn btn-navy">Guardar cambios</button><p class="ok-msg" id="dOk" hidden>Guardamos tus datos.</p>
+    </form>
+  </div></section>
+</main>
+<footer class="mini"><div class="wrap"><span>© 2026 Navi Repair Center</span><span>Aviso de privacidad · Términos y condiciones</span></div></footer>
+
+<script>
+const user = RC.current();
+if (user) {
+  rcChrome('centro');
+  const $ = id => document.getElementById(id);
+  $('hello').textContent = `Hola, ${user.name}`;
+  $('sub').textContent = `${user.email} · Centro de servicio`;
+  const tickets = RC.tickets();
+  // la reparación más avanzada que siga abierta (los tickets recién creados se ven en el historial)
+  const cur = tickets.filter(t => t.estatus !== 'Entregado').sort((a, b) => (b.paso || 0) - (a.paso || 0))[0];
+
+  if (cur) {
+    const paso = cur.paso ?? 0;
+    $('cur').innerHTML = `<div class="hd"><h2>${paso === 0 ? 'Ticket nuevo' : 'Reparación en curso'}</h2>${estatusPill(cur.estatus)}</div>
+      <div class="kv"><div><small>FOLIO</small><b>${cur.folio}</b></div><div><small>ID TICKET</small><b>${cur.ticket}</b></div><div><small>MODALIDAD</small><b>${cur.modalidad === 'uw' ? 'CON GARANTÍA | UW' : 'SIN GARANTÍA | OOW'}</b></div>
+        <div><small>TIPO DE SERVICIO</small><b>${cur.servicio}</b></div><div><small>EQUIPO</small><b>${cur.equipo}</b></div><div><small>PAÍS</small><b>México</b></div></div>
+      <div class="track">${RC_STEPS.map((s, k) => `<div class="${k < paso ? 'ok' : k === paso ? 'now' : ''}"><i>${k < paso ? '✓' : ''}</i><b>${s}</b><span>${(cur.pasos || [])[k] || (k === paso ? 'En curso' : '—')}</span></div>`).join('')}</div>
+      <div class="upd"><small>Última actualización · ${cur.act || cur.fecha}</small>${cur.nota || 'Recibimos tu ticket. Te enviamos la guía prepagada por correo para que nos mandes tu equipo.'}</div>`;
+    $('dev').innerHTML = `<div class="pic"><img src="assets/${cur.img || 'audifonos'}.svg" alt=""></div><h2>Tu equipo</h2>
+      <dl><dt>Marca</dt><dd>${cur.marca || '—'}</dd><dt>Modelo</dt><dd>${cur.modelo || '—'}</dd><dt>Número de serie</dt><dd>${cur.serie || '—'}</dd><dt>Recibido en centro</dt><dd>${cur.recibido || 'Pendiente'}</dd></dl>
+      <a class="btn btn-line" href="index.html#ayuda">¿Dudas? Contáctanos</a>`;
+  } else {
+    $('cur').innerHTML = '<h2>No tienes reparaciones en curso</h2><p class="muted" style="margin:10px 0 16px">Cuando abras un ticket, aquí verás cada paso.</p><a class="btn btn-navy" href="nuevo-ticket.html">Nuevo ticket fuera de garantía</a>';
+    $('dev').hidden = true;
+  }
+  const table = `<table><thead><tr><th>FOLIO</th><th>FECHA</th><th>EQUIPO</th><th>MODALIDAD</th><th>SERVICIO</th><th>ESTATUS</th></tr></thead><tbody>
+    ${tickets.map(t => `<tr><td>${t.folio}</td><td>${t.fecha}</td><td>${t.equipo}</td><td>${modalidad(t.modalidad)}</td><td>${t.servicio}</td><td>${estatusPill(t.estatus)}</td></tr>`).join('')}</tbody></table>`;
+  $('tbl1').innerHTML = table; $('tbl2').innerHTML = table;
+
+  // pestañas (también desde el menú "Rastrear mi servicio" → #historial)
+  const show = t => {
+    document.querySelectorAll('section[data-tab]').forEach(s => s.classList.toggle('on', s.dataset.tab === t));
+    document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.t === t));
+  };
+  document.querySelector('.tabs').addEventListener('click', e => { const b = e.target.closest('button[data-t]'); if (b) show(b.dataset.t); });
+  if (['historial', 'datos'].includes(location.hash.slice(1))) show(location.hash.slice(1));
+
+  // mis datos (demo, en este navegador)
+  let D = {}; try { D = JSON.parse(localStorage.getItem('navirc.datos')) || {}; } catch {}
+  $('dN').value = D.n || `${user.name} ${user.last}`; $('dE').value = user.email; $('dP').value = D.p || ''; $('dA').value = D.a || '';
+  $('datos').addEventListener('submit', e => { e.preventDefault(); try { localStorage.setItem('navirc.datos', JSON.stringify({ n: $('dN').value, p: $('dP').value, a: $('dA').value })); } catch {} $('dOk').hidden = false; setTimeout(() => $('dOk').hidden = true, 2500); });
+  $('logout').onclick = () => { RC.logout(); location.href = 'index.html'; };
+}
+</script>
+</body>
+</html>
