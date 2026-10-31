@@ -42,7 +42,7 @@ const maskEmail = e => e.replace(/^(..)[^@]*/, (m, a) => a + '•'.repeat(6));
 function rcChrome(active) {
   const user = RC.current();
   document.body.insertAdjacentHTML('afterbegin', `
-  <div class="sections"><div class="wrap"><span>⌂ Todo Navi</span>
+  <div class="sections"><div class="wrap">
     <nav><a href="${NAVI_MOVIL}">📱 Navi Móvil →</a><a class="on" href="index.html">🔧 Navi Repair Center · estás aquí</a><a href="${NAVI_SHOP}">🛍️ Navi Shop →</a></nav></div></div>
   <header class="main"><div class="wrap">
     <a class="logo" href="index.html"><img src="assets/navi-logo.png" alt="Navi"><small>REPAIR CENTER</small></a>

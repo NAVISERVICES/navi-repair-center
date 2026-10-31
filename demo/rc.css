@@ -26,7 +26,7 @@ h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-h
 
 /* barra de secciones Navi */
 .sections{background:var(--deep);color:var(--muted);font-size:12px}
-.sections .wrap{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:34px}
+.sections .wrap{display:flex;justify-content:flex-end;align-items:center;gap:10px;min-height:34px}
 .sections nav{display:flex;gap:6px}
 .sections nav a{padding:4px 12px;border-radius:99px;white-space:nowrap}
 .sections nav a:hover{color:#fff}
