@@ -31,7 +31,7 @@ function paintCount() { const n = Cart.count(); document.querySelectorAll('[data
 
 function shopChrome() {
   document.body.insertAdjacentHTML('afterbegin', `
-  <div class="sections"><div class="wrap"><span>⌂ Todo Navi</span>
+  <div class="sections"><div class="wrap">
     <nav><a href="${NAVI_MOVIL}">📱 Navi Móvil →</a><a href="../index.html">🔧 Navi Repair Center →</a><a class="on" href="index.html">🛍️ Navi Shop · estás aquí</a></nav></div></div>
   <header class="main"><div class="wrap">
     <a class="logo" href="index.html"><img src="../assets/navi-logo.png" alt="Navi"><small>SHOP</small></a>
