@@ -1,27 +1,31 @@
-/* Navi Shop (se apoya en ../rc.css) */
-body{background:var(--bg)}
-.btn-ink{background:#0B0C2A;color:#fff}
+/* Navi Shop (se apoya en ../rc.css): misma imagen Navi, acento amarillo con rosa */
+:root{ --acc:#FFC22E; --acc-ink:#2A1B3D; --acc-2:#FF6FB1; }
+body{background:radial-gradient(ellipse 70% 600px at 10% 0,#2a1a6e 0,transparent 100%) no-repeat,var(--page)}
+.logo small{background:linear-gradient(90deg,#FFC22E,#FF6FB1)}
+.sections nav a.on{background:linear-gradient(90deg,#FFC22E,#FF6FB1)}
+.btn-ink{background:var(--acc);color:var(--acc-ink);box-shadow:0 5px 0 #B8860B}
 .crumb{font-size:13px;color:var(--text);padding:22px 0 18px}
-.crumb a:hover{text-decoration:underline}
+.crumb a:hover{text-decoration:underline;color:var(--acc)}
 .crumb b{color:var(--ink)}
 .cartlink{position:relative}
-.cartlink b{position:absolute;top:-6px;right:-10px;min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:var(--lime);color:var(--ink);font-size:11px;display:grid;place-items:center}
+.cartlink b{position:absolute;top:-6px;right:-8px;min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:var(--acc-2);color:#fff;font-size:11px;display:grid;place-items:center}
 .cartlink b[hidden]{display:none}
-/* tarjeta de producto */
-.pc{background:#fff;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
-.pc:hover{transform:translateY(-3px);box-shadow:0 14px 30px #1a247d14}
-.pc .ph{position:relative;height:230px;display:grid;place-items:center;border-bottom:1px solid var(--line)}
-.pc .ph img{width:200px;height:200px;object-fit:contain;background:#F7F7FA;border-radius:12px;padding:14px}
-.stk{position:absolute;top:14px;left:14px;background:#EEF8D6;color:#2F5200;font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px}
-.stk.low{background:#FFF4DD;color:#7A4B00}
+/* tarjeta de producto: foto sobre fondo claro dentro de una tarjeta oscura */
+.pc{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.3,1.6,.5,1),box-shadow .3s}
+.pc:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 18px 40px #0007}
+.pc .ph{position:relative;height:230px;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#ffffff1a,transparent 70%)}
+.pc .ph img{width:196px;height:196px;object-fit:contain;background:#F7F7FA;border-radius:18px;padding:14px;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.pc:hover .ph img{transform:scale(1.05) rotate(2deg)}
+.stk{position:absolute;top:14px;left:14px;background:var(--lime);color:#06062E;font-size:12px;font-weight:800;padding:5px 10px;border-radius:99px}
+.stk.low{background:var(--acc-2);color:#fff}
 .pd{display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;flex:1}
-.pd small{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--text)}
+.pd small{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--acc)}
 .pd b{font-size:16px;line-height:1.25}
 .pd .col{font-size:13px;color:var(--text)}
-.pd .pr{font-family:var(--display);font-weight:800;font-size:20px;margin-top:auto}
+.pd .pr{font-family:var(--display);font-weight:800;font-size:22px;margin-top:auto}
 .pd .btn{padding:11px 18px;font-size:14px}
-.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;background:#0B0C2A;color:#fff;font-weight:700;font-size:14px;padding:12px 18px;border-radius:14px;box-shadow:0 12px 30px #0005;z-index:70;transition:all .3s;max-width:calc(100% - 32px)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;background:#fff;color:#06062E;font-weight:700;font-size:14px;padding:12px 18px;border-radius:14px;box-shadow:0 12px 30px #0007;z-index:70;transition:all .3s;max-width:calc(100% - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:99px;background:#fff}
+.qty{display:inline-flex;align-items:center;border:2px solid var(--line);border-radius:99px;background:#ffffff0d}
 .qty button{width:38px;height:40px;font-size:18px;font-weight:700}
 .qty span{min-width:24px;text-align:center;font-weight:700}
