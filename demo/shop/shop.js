@@ -4,8 +4,11 @@ const mxn = n => '$' + n.toLocaleString('es-MX');
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const catOf = id => SHOP_CATS.find(c => c.id === id);
 const prod = id => SHOP_PRODUCTS.find(p => p.id === id);
-// ilustración de referencia por categoría (el diseño aún no tiene fotos de cada modelo)
-const imgOf = p => `../assets/${catOf(p.cat).img}.svg`;
+// foto del modelo si la tiene; si no, la ilustración de referencia de su categoría
+const imgOf = p => p.img || `../assets/${catOf(p.cat).img}.svg`;
+const imgCls = p => p.img ? 'photo' : '';
+const wasTxt = p => p.was ? `<s class="was">${mxn(p.was)}</s><em class="off">-${Math.round((1 - p.price / p.was) * 100)}%</em>` : '';
+const colorsTxt = p => !p.colors.length ? '&nbsp;' : esc(p.colors.slice(0, 3).join(' · ')) + (p.colors.length > 3 ? ` · +${p.colors.length - 3}` : '');
 const stockPill = p => p.stock <= 1 ? '<span class="stk low">Última pieza</span>'
   : `<span class="stk ${p.stock <= 4 ? 'low' : ''}">${p.stock} disponibles</span>`;
 
@@ -36,7 +39,7 @@ function shopChrome() {
   <header class="main"><div class="wrap">
     <a class="logo" href="index.html"><img src="../assets/navi-logo.png" alt="Navi"><small>SHOP</small></a>
     <nav class="menu">
-      <a href="index.html#audifonos">Audífonos</a><a href="index.html#bocinas">Bocinas</a><a href="index.html#celulares">Celulares</a><a href="index.html#pro">Audio profesional</a><a href="index.html#ofertas">Ofertas</a>
+      <a href="index.html#reacondicionados">Reacondicionados</a><a href="index.html#audifonos">Audífonos</a><a href="index.html#bocinas">Bocinas</a><a href="index.html#casa">Teatro en casa</a><a href="index.html#celulares">Celulares</a><a href="index.html#pro">Audio profesional</a><a href="index.html#ofertas">Ofertas</a>
     </nav>
     <div class="hdr-icons"><a href="index.html#buscar" aria-label="Buscar">⌕</a><a href="../acceso.html" aria-label="Mi cuenta">👤</a>
       <a href="carrito.html" class="cartlink" aria-label="Carrito">🛒<b data-cartcount hidden></b></a></div>
@@ -48,11 +51,11 @@ const toast = t => { const e = document.getElementById('toast'); e.textContent =
 
 // tarjeta de producto (catálogo y "también te puede interesar")
 const card = p => `<article class="pc">
-  <a class="ph" href="producto.html#${p.id}"><img src="${imgOf(p)}" alt="" loading="lazy">${stockPill(p)}</a>
-  <div class="pd"><small>${esc(p.brand)}${p.cond === 'Liberado' ? ' · LIBERADO' : ''}</small>
+  <a class="ph" href="producto.html#${p.id}"><img class="${imgCls(p)}" src="${imgOf(p)}" alt="" loading="lazy">${stockPill(p)}${p.cond === 'Reacondicionado' ? '<span class="rcb">Reacondicionado</span>' : ''}</a>
+  <div class="pd"><small>${esc(p.brand)}${p.cond === 'Liberado' ? ' · LIBERADO' : p.cond === 'Reacondicionado' ? ' · CERTIFIED REFURBISHED' : ''}</small>
     <a href="producto.html#${p.id}"><b>${esc(p.name)}</b></a>
-    <span class="col">${p.colors.length ? esc(p.colors.join(' · ')) : '&nbsp;'}</span>
-    <span class="pr">${mxn(p.price)}</span>
+    <span class="col">${colorsTxt(p)}</span>
+    <span class="pr">${mxn(p.price)}${wasTxt(p)}</span>
     <button class="btn btn-ink btn-block" data-add="${p.id}">Agregar al carrito</button></div>
 </article>`;
 document.addEventListener('click', e => {

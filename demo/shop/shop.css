@@ -18,6 +18,11 @@ body{background:radial-gradient(ellipse 70% 600px at 10% 0,#2a1a6e 0,transparent
 .pc:hover .ph img{transform:scale(1.05) rotate(2deg)}
 .stk{position:absolute;top:14px;left:14px;background:var(--lime);color:#06062E;font-size:12px;font-weight:800;padding:5px 10px;border-radius:99px}
 .stk.low{background:var(--acc-2);color:#fff}
+/* fotos reales del modelo: llenan el recuadro claro */
+.pc .ph img.photo{width:calc(100% - 28px);height:200px;padding:8px;background:#fff}
+.rcb{position:absolute;top:14px;right:14px;background:#06062E;color:var(--acc);font-size:11px;font-weight:800;padding:5px 10px;border-radius:99px;letter-spacing:.02em}
+.pd .was{font-family:var(--body);font-weight:500;font-size:14px;color:var(--text);opacity:.7;margin-left:8px}
+.pd .off{font-family:var(--body);font-style:normal;font-size:12px;font-weight:800;background:var(--lime);color:#06062E;border-radius:99px;padding:2px 7px;margin-left:6px;vertical-align:middle}
 .pd{display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;flex:1}
 .pd small{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--acc)}
 .pd b{font-size:16px;line-height:1.25}

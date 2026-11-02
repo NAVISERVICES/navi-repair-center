@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../rc.css?v=4">
-<link rel="stylesheet" href="shop.css?v=3">
+<link rel="stylesheet" href="shop.css?v=4">
 <style>
 h1{font-size:clamp(30px,3.6vw,40px);margin-bottom:22px}
 .lay{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start;margin-bottom:64px}
@@ -48,8 +48,8 @@ h1{font-size:clamp(30px,3.6vw,40px);margin-bottom:22px}
 </main>
 <footer class="mini"><div class="wrap"><span>© 2026 Navi Repair Center</span><span>Aviso de privacidad · Términos y condiciones</span></div></footer>
 
-<script src="products.js?v=1"></script>
-<script src="shop.js?v=3"></script>
+<script src="products.js?v=2"></script>
+<script src="shop.js?v=4"></script>
 <script>
 shopChrome();
 const $ = id => document.getElementById(id);
@@ -62,7 +62,7 @@ function render() {
   }
   $('sum').hidden = false;
   $('items').innerHTML = items.map(i => `<div class="it">
-      <img src="${imgOf(i.p)}" alt="">
+      <img class="${imgCls(i.p)}" src="${imgOf(i.p)}" alt="">
       <div><b><a href="producto.html#${i.p.id}">${esc(i.p.name)}</a>${i.color ? ' · ' + esc(i.color) : ''}</b><small>${mxn(i.p.price)} c/u</small></div>
       <div class="qty"><button data-q="-1" data-id="${i.id}" data-c="${esc(i.color)}" aria-label="Menos">−</button><span>${i.qty}</span><button data-q="1" data-id="${i.id}" data-c="${esc(i.color)}" aria-label="Más">+</button></div>
       <div class="tot">${mxn(i.p.price * i.qty)}</div>

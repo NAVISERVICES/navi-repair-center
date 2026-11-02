@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../rc.css?v=4">
-<link rel="stylesheet" href="shop.css?v=3">
+<link rel="stylesheet" href="shop.css?v=4">
 <style>
 .banner{background:linear-gradient(120deg,#FF3D7F,#FF6FB1 45%,#FFC22E);color:#06062E;box-shadow:0 10px 0 #7B5CFA;border-radius:28px;padding:32px 40px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 .banner small{font-size:13px;font-weight:700;letter-spacing:.14em;color:#06062E}
@@ -53,14 +53,15 @@
 <main class="wrap">
   <div class="crumb"><b>Navi Shop</b></div>
   <section class="banner">
-    <div><small>SHOP NAVI</small><h1>Bose y celulares liberados, con existencias en bodega</h1><p>Envío a todo México · Compra segura · Fotos de referencia del modelo</p></div>
+    <div><small>SHOP NAVI</small><h1>Bose nuevo y reacondicionado, y celulares liberados</h1><p>Envío a todo México · Compra segura · <a href="#reacondicionados" style="text-decoration:underline">Ver Bose Certified Refurbished →</a></p></div>
     <span class="promo" id="promo"></span>
   </section>
-  <p class="demo-note">Demostración: precios de ejemplo e ilustraciones de referencia mientras se cargan las fotos de cada modelo.</p>
+  <p class="demo-note">Demostración: precios de ejemplo. Los Bose reacondicionados llevan su foto oficial; el resto, ilustraciones de referencia mientras se cargan sus fotos.</p>
   <div class="layout">
     <aside class="filters" id="filters">
       <h2>Filtrar</h2>
       <h3>Categoría</h3><div id="fCat"></div>
+      <h3>Condición</h3><div id="fCond"></div>
       <h3>Marca</h3><div id="fBrand"></div>
       <h3>Precio</h3><div class="range"><input id="pMin" inputmode="numeric" placeholder="$ mín." aria-label="Precio mínimo"><input id="pMax" inputmode="numeric" placeholder="$ máx." aria-label="Precio máximo"></div>
       <button class="btn btn-line" id="clear">Limpiar filtros</button>
@@ -74,8 +75,8 @@
 </main>
 <footer class="mini"><div class="wrap"><span>© 2026 Navi Repair Center</span><span>Aviso de privacidad · Términos y condiciones</span></div></footer>
 
-<script src="products.js?v=1"></script>
-<script src="shop.js?v=3"></script>
+<script src="products.js?v=2"></script>
+<script src="shop.js?v=4"></script>
 <script>
 shopChrome();
 const $ = id => document.getElementById(id);
@@ -84,15 +85,17 @@ $('promo').textContent = `${SHOP_PRODUCTS.length} modelos · ${pieces} piezas`;
 const brands = [...SHOP_PRODUCTS.reduce((m, p) => m.set(p.brand, (m.get(p.brand) || 0) + 1), new Map())].sort((a, b) => b[1] - a[1]);
 const title = s => s.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
 $('fCat').innerHTML = SHOP_CATS.map(c => `<label class="opt"><input type="checkbox" value="${c.id}" data-f="cat"><span>${c.name}</span><em>${SHOP_PRODUCTS.filter(p => p.cat === c.id).length}</em></label>`).join('');
+$('fCond').innerHTML = ['Reacondicionado', 'Nuevo', 'Liberado'].map(c => `<label class="opt"><input type="checkbox" value="${c}" data-f="cond"><span>${c}</span><em>${SHOP_PRODUCTS.filter(p => p.cond === c).length}</em></label>`).join('');
 $('fBrand').innerHTML = brands.map(([b, n]) => `<label class="opt"><input type="checkbox" value="${b}" data-f="brand"><span>${title(b)}</span><em>${n}</em></label>`).join('');
 let ofertas = false;
 
 const render = () => {
   const cats = [...document.querySelectorAll('[data-f=cat]:checked')].map(i => i.value);
   const brs = [...document.querySelectorAll('[data-f=brand]:checked')].map(i => i.value);
+  const conds = [...document.querySelectorAll('[data-f=cond]:checked')].map(i => i.value);
   const min = +$('pMin').value.replace(/\D/g, '') || 0, max = +$('pMax').value.replace(/\D/g, '') || Infinity;
   const q = $('q').value.trim().toLowerCase();
-  const list = SHOP_PRODUCTS.filter(p => (!cats.length || cats.includes(p.cat)) && (!brs.length || brs.includes(p.brand))
+  const list = SHOP_PRODUCTS.filter(p => (!cats.length || cats.includes(p.cat)) && (!brs.length || brs.includes(p.brand)) && (!conds.length || conds.includes(p.cond))
     && p.price >= min && p.price <= max && (!q || (p.name + ' ' + p.brand).toLowerCase().includes(q)) && (!ofertas || p.stock <= 1));
   const groups = SHOP_CATS.map(c => [c, list.filter(p => p.cat === c.id)]).filter(([, l]) => l.length);
   $('results').innerHTML = (ofertas ? '<div class="cat"><div class="t"><h2>Ofertas · últimas piezas</h2><span><a href="index.html" id="allLink">Ver todo</a></span></div></div>' : '')
@@ -109,6 +112,7 @@ const fromHash = () => {
   const h = location.hash.slice(1);
   document.querySelectorAll('[data-f]').forEach(i => i.checked = false); ofertas = false;
   if (h === 'ofertas') ofertas = true;
+  else if (h === 'reacondicionados') document.querySelector('[data-f=cond][value="Reacondicionado"]').checked = true;
   else if (h === 'audifonos') document.querySelectorAll('[data-f=cat]').forEach(i => i.checked = ['audifonos', 'inear'].includes(i.value));
   else if (SHOP_CATS.some(c => c.id === h)) document.querySelector(`[data-f=cat][value="${h}"]`).checked = true;
   render();
